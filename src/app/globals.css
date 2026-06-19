@@ -188,4 +188,137 @@
   .skeleton-shine {
     @apply bg-stone-100 dark:bg-stone-800;
   }
+
+  /* Badge variants with proper dark mode */
+  .badge-lunas {
+    @apply bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400;
+  }
+
+  .badge-piutang {
+    @apply bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400;
+  }
+
+  .badge-bonus {
+    @apply bg-yellow-50 text-yellow-700 dark:bg-yellow-950/40 dark:text-yellow-400;
+  }
+
+  .badge-lm {
+    @apply bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400;
+  }
+
+  .badge-br {
+    @apply bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400;
+  }
+
+  /* Stat card icon backgrounds */
+  .icon-bg-indigo {
+    @apply bg-indigo-50 dark:bg-indigo-950/40;
+  }
+
+  .icon-bg-emerald {
+    @apply bg-emerald-50 dark:bg-emerald-950/40;
+  }
+
+  .icon-bg-amber {
+    @apply bg-amber-50 dark:bg-amber-950/40;
+  }
+
+  .icon-bg-purple {
+    @apply bg-purple-50 dark:bg-purple-950/40;
+  }
+
+  .icon-bg-orange {
+    @apply bg-orange-50 dark:bg-orange-950/40;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.35s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Staggered children animation */
+  .stagger-children > * {
+    animation: slideUp 0.4s ease-out backwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+  /* Hover card lift */
+  .hover-lift {
+    @apply transition-all duration-200;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark .hover-lift:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white/70 dark:bg-stone-950/70 backdrop-blur-xl;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 dark:from-indigo-400 dark:to-indigo-300;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-stone-300 dark:bg-stone-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-stone-400 dark:bg-stone-600;
 }

@@ -382,7 +382,7 @@ export default function CustomerDetailPage() {
                       <Badge
                         key={i}
                         variant="secondary"
-                        className="text-xs bg-indigo-50 text-indigo-700"
+                        className="text-xs badge-br"
                       >
                         {d}%
                       </Badge>
@@ -409,7 +409,7 @@ export default function CustomerDetailPage() {
                       <Badge
                         key={i}
                         variant="secondary"
-                        className="text-xs bg-purple-50 text-purple-700"
+                        className="text-xs badge-br"
                       >
                         {d}%
                       </Badge>
@@ -439,7 +439,7 @@ export default function CustomerDetailPage() {
         <Card
           className={`min-h-[100px] ${
             bonusesAvailable > 0
-              ? "border-yellow-300 bg-yellow-50/50"
+              ? "border-yellow-300 dark:border-yellow-800/40 bg-yellow-50/50 dark:bg-yellow-950/10"
               : ""
           }`}
         >
@@ -537,8 +537,8 @@ export default function CustomerDetailPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-indigo-50 p-2.5">
-                <TrendingUp className="h-5 w-5 text-indigo-600" />
+              <div className="rounded-lg icon-bg-indigo p-2.5">
+                <TrendingUp className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div>
                 <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Omzet Lunas</p>
@@ -569,15 +569,15 @@ export default function CustomerDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-orange-200 bg-orange-50/30">
+        <Card className="border-orange-200 dark:border-orange-900/30 bg-orange-50/30 dark:bg-orange-950/10">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-orange-100 p-2.5">
-                <TrendingDown className="h-5 w-5 text-orange-600" />
+              <div className="rounded-lg bg-orange-100 dark:bg-orange-950/40 p-2.5">
+                <TrendingDown className="h-5 w-5 text-orange-600 dark:text-orange-400" />
               </div>
               <div>
                 <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Piutang</p>
-                <p className="text-lg font-bold text-orange-600">
+                <p className="text-lg font-bold text-orange-600 dark:text-orange-400">
                   {formatIDR(stats.piutang)}
                 </p>
                 <p className="text-[11px] text-stone-400 dark:text-stone-500">
@@ -591,8 +591,8 @@ export default function CustomerDetailPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-indigo-50 p-2.5">
-                <TrendingUp className="h-5 w-5 text-indigo-500" />
+              <div className="rounded-lg icon-bg-indigo p-2.5">
+                <TrendingUp className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
               </div>
               <div>
                 <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Omzet LM</p>
@@ -607,8 +607,8 @@ export default function CustomerDetailPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-purple-50 p-2.5">
-                <TrendingUp className="h-5 w-5 text-purple-500" />
+              <div className="rounded-lg icon-bg-purple p-2.5">
+                <TrendingUp className="h-5 w-5 text-purple-500 dark:text-purple-400" />
               </div>
               <div>
                 <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Omzet BR</p>
@@ -623,8 +623,8 @@ export default function CustomerDetailPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-emerald-50 p-2.5">
-                <TrendingUp className="h-5 w-5 text-emerald-600" />
+              <div className="rounded-lg icon-bg-emerald p-2.5">
+                <TrendingUp className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
                 <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Laba HL Lunas</p>
@@ -693,7 +693,7 @@ export default function CustomerDetailPage() {
                       <TableRow
                         key={t.id}
                         className={`hover:bg-stone-50/50 dark:hover:bg-stone-800/40 transition-colors ${
-                          t.status === "Lunas" ? "bg-green-50/30" : ""
+                          t.status === "Lunas" ? "bg-emerald-50/30 dark:bg-emerald-950/10" : ""
                         }`}
                       >
                         <TableCell className="text-sm">
@@ -711,7 +711,7 @@ export default function CustomerDetailPage() {
                             {t.is_bonus && (
                               <Badge
                                 variant="secondary"
-                                className="text-xs bg-yellow-50 text-yellow-700"
+                                className="text-xs badge-bonus"
                               >
                                 Bonus
                               </Badge>
@@ -723,8 +723,8 @@ export default function CustomerDetailPage() {
                             variant="secondary"
                             className={`text-xs ${
                               t.status === "Lunas"
-                                ? "bg-green-50 text-green-700"
-                                : "bg-orange-50 text-orange-700"
+                                ? "badge-lunas"
+                                : "badge-piutang"
                             }`}
                           >
                             {t.status}

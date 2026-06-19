@@ -348,16 +348,16 @@ export default function TransactionsPage() {
                       </TableCell>
                       <TableCell>
                         {t.is_bonus ? (
-                          <Badge variant="secondary" className="text-xs bg-yellow-50 text-yellow-700">
+                          <Badge variant="secondary" className="text-xs badge-bonus">
                             Bonus
                           </Badge>
                         ) : (
                           <div className="flex gap-1">
                             {t.transaction_lines?.some((l) => l.product?.tipe === "LM") && (
-                              <Badge variant="secondary" className="text-xs bg-indigo-50 text-indigo-700">LM</Badge>
+                              <Badge variant="secondary" className="text-xs badge-lm">LM</Badge>
                             )}
                             {t.transaction_lines?.some((l) => l.product?.tipe === "BR") && (
-                              <Badge variant="secondary" className="text-xs bg-purple-50 text-purple-700">BR</Badge>
+                              <Badge variant="secondary" className="text-xs badge-br">BR</Badge>
                             )}
                           </div>
                         )}
@@ -367,8 +367,8 @@ export default function TransactionsPage() {
                           variant="secondary"
                           className={`text-xs ${
                             t.status === "Lunas"
-                              ? "bg-green-50 text-green-700"
-                              : "bg-orange-50 text-orange-700"
+                              ? "badge-lunas"
+                              : "badge-piutang"
                           }`}
                         >
                           {t.status === "Lunas" ? "Lunas" : "Piutang"}

@@ -243,7 +243,7 @@ export default function CustomersPage() {
                       <TableCell>
                         {customer.diskon_lm.length > 0
                           ? customer.diskon_lm.map((d, i) => (
-                              <Badge key={i} variant="secondary" className="mr-1 text-xs bg-indigo-50 text-indigo-700 hover:bg-indigo-50">
+                              <Badge key={i} variant="secondary" className="mr-1 text-xs badge-lm">
                                 {d}%
                               </Badge>
                             ))
@@ -252,7 +252,7 @@ export default function CustomersPage() {
                       <TableCell>
                         {customer.diskon_br.length > 0
                           ? customer.diskon_br.map((d, i) => (
-                              <Badge key={i} variant="secondary" className="mr-1 text-xs bg-purple-50 text-purple-700 hover:bg-purple-50">
+                              <Badge key={i} variant="secondary" className="mr-1 text-xs badge-br">
                                 {d}%
                               </Badge>
                             ))

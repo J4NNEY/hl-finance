@@ -246,8 +246,8 @@ export default function ProductsPage() {
                           variant="secondary"
                           className={`text-xs ${
                             product.tipe === "LM"
-                              ? "bg-indigo-50 text-indigo-700 hover:bg-indigo-50"
-                              : "bg-purple-50 text-purple-700 hover:bg-purple-50"
+                              ? "badge-lm hover:bg-indigo-50 dark:hover:bg-indigo-950/40"
+                              : "badge-br hover:bg-purple-50 dark:hover:bg-purple-950/40"
                           }`}
                         >
                           {product.tipe}

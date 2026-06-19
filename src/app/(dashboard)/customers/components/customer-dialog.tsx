@@ -65,8 +65,8 @@ function DiscountSection({
 }) {
   const colorClasses =
     color === "blue"
-      ? "bg-indigo-50 text-indigo-700"
-      : "bg-purple-50 text-purple-700";
+      ? "badge-lm"
+      : "badge-br";
 
   return (
     <div className="space-y-1.5">

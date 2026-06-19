@@ -377,8 +377,8 @@ export default async function DashboardPage() {
                             variant="secondary"
                             className={`text-[10px] mt-0.5 ${
                               t.status === "Lunas"
-                                ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"
-                                : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400"
+                                ? "badge-lunas"
+                                : "badge-piutang"
                             }`}
                           >
                             {t.status}

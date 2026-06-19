@@ -320,8 +320,8 @@ export default function TransactionDetailPage() {
                 variant="secondary"
                 className={`text-xs ${
                   transaction.status === "Lunas"
-                    ? "bg-green-50 text-green-700 dark:bg-emerald-950/40 dark:text-emerald-400"
-                    : "bg-orange-50 text-orange-700 dark:bg-amber-950/40 dark:text-amber-400"
+                    ? "badge-lunas"
+                    : "badge-piutang"
                 }`}
               >
                 {transaction.status}
@@ -329,7 +329,7 @@ export default function TransactionDetailPage() {
               {transaction.is_bonus && (
                 <Badge
                   variant="secondary"
-                  className="text-xs bg-yellow-50 text-yellow-700"
+                  className="text-xs badge-bonus"
                 >
                   Bonus
                 </Badge>
@@ -414,8 +414,8 @@ export default function TransactionDetailPage() {
                 variant="secondary"
                 className={`text-xs ${
                   transaction.status === "Lunas"
-                    ? "bg-green-50 text-green-700 dark:bg-emerald-950/40 dark:text-emerald-400"
-                    : "bg-orange-50 text-orange-700 dark:bg-amber-950/40 dark:text-amber-400"
+                    ? "badge-lunas"
+                    : "badge-piutang"
                 }`}
               >
                 {transaction.status}
@@ -523,8 +523,8 @@ export default function TransactionDetailPage() {
                           variant="secondary"
                           className={`text-xs ${
                             line.product?.tipe === "LM"
-                              ? "bg-indigo-50 text-indigo-700"
-                              : "bg-purple-50 text-purple-700"
+                              ? "badge-lm"
+                              : "badge-br"
                           }`}
                         >
                           {line.product?.tipe || "-"}
@@ -539,7 +539,7 @@ export default function TransactionDetailPage() {
                       <TableCell className="text-right text-sm font-medium">
                         {formatIDR(line.line_omzet)}
                       </TableCell>
-                      <TableCell className="text-right text-sm font-medium text-green-600">
+                      <TableCell className="text-right text-sm font-medium text-emerald-600 dark:text-emerald-400">
                         {formatIDR(line.line_laba)}
                       </TableCell>
                     </TableRow>
@@ -575,7 +575,7 @@ export default function TransactionDetailPage() {
           <Separator />
           <div className="flex justify-between text-sm">
             <span className="text-stone-500 dark:text-stone-400">Total Laba</span>
-            <span className="font-medium text-green-600">
+            <span className="font-medium text-emerald-600 dark:text-emerald-400">
               {formatIDR(totalLaba)}
             </span>
           </div>

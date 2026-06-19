@@ -612,7 +612,7 @@ export default function NewTransactionPage() {
                     <div key={index} className="rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-4 space-y-3" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
                             {index + 1}
                           </span>
                           <span className="text-sm font-medium text-stone-700 dark:text-stone-200">
@@ -785,11 +785,11 @@ export default function NewTransactionPage() {
                       </div>
                     )}
                     {bonusesAvailable > 0 && (
-                      <div className="rounded-md bg-yellow-50 border border-yellow-200 p-2 mt-2">
-                        <p className="text-xs font-medium text-yellow-800">
+                      <div className="rounded-md bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900/30 p-2 mt-2">
+                        <p className="text-xs font-medium text-yellow-800 dark:text-yellow-300">
                           Bonus tersedia: {bonusesAvailable}
                         </p>
-                        <p className="text-[11px] text-yellow-600">
+                        <p className="text-[11px] text-yellow-600 dark:text-yellow-400">
                           Threshold: {formatIDR(selectedCustomer.bonus_threshold)}
                         </p>
                       </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Customer } from "@/types";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -67,6 +68,8 @@ interface ReportData {
 
 export default function ReportsPage() {
   const supabase = createClient();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [selectedCustomer, setSelectedCustomer] = useState<string>("all");
@@ -382,22 +385,22 @@ export default function ReportsPage() {
                   <ResponsiveContainer width="100%" height={250} minWidth={0}>
                     <BarChart
                       data={[
-                    { name: "Omzet", value: reportData.total_omzet_lunas, color: "#4338ca" },
-                    { name: "Laba", value: reportData.total_laba_lunas, color: "#059669" },
-                    { name: "Piutang", value: reportData.total_piutang, color: "#dc2626" },
-                    { name: "Dibayar", value: reportData.total_sudah_dibayar, color: "#7c3aed" },
+                    { name: "Omzet", value: reportData.total_omzet_lunas, color: isDark ? "#818cf8" : "#4338ca" },
+                    { name: "Laba", value: reportData.total_laba_lunas, color: isDark ? "#34d399" : "#059669" },
+                    { name: "Piutang", value: reportData.total_piutang, color: isDark ? "#f87171" : "#dc2626" },
+                    { name: "Dibayar", value: reportData.total_sudah_dibayar, color: isDark ? "#a78bfa" : "#7c3aed" },
                   ]}
                   margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#292524" : "#f1f5f9"} />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 12, fill: "#64748b" }}
+                    tick={{ fontSize: 12, fill: isDark ? "#a8a29e" : "#64748b" }}
                     axisLine={false}
                     tickLine={false}
                   />
                   <YAxis
-                    tick={{ fontSize: 11, fill: "#64748b" }}
+                    tick={{ fontSize: 11, fill: isDark ? "#a8a29e" : "#64748b" }}
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(v) =>
@@ -411,17 +414,22 @@ export default function ReportsPage() {
                   <Tooltip
                     contentStyle={{
                       fontSize: 12,
-                      borderRadius: 8,
-                      border: "1px solid #e2e8f0",
+                      borderRadius: 10,
+                      border: `1px solid ${isDark ? "#292524" : "#e2e8f0"}`,
+                      background: isDark ? "#1c1917" : "#fff",
+                      color: isDark ? "#e7e5e4" : "#1c1917",
+                      boxShadow: isDark
+                        ? "0 4px 12px rgba(0,0,0,0.4)"
+                        : "0 4px 12px rgba(0,0,0,0.08)",
                     }}
                     formatter={(value) => [formatIDR(Number(value))]}
                   />
                   <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                     {[
-                      { name: "Omzet", value: reportData.total_omzet_lunas, color: "#4338ca" },
-                      { name: "Laba", value: reportData.total_laba_lunas, color: "#059669" },
-                      { name: "Piutang", value: reportData.total_piutang, color: "#dc2626" },
-                      { name: "Dibayar", value: reportData.total_sudah_dibayar, color: "#7c3aed" },
+                      { name: "Omzet", value: reportData.total_omzet_lunas, color: isDark ? "#818cf8" : "#4338ca" },
+                      { name: "Laba", value: reportData.total_laba_lunas, color: isDark ? "#34d399" : "#059669" },
+                      { name: "Piutang", value: reportData.total_piutang, color: isDark ? "#f87171" : "#dc2626" },
+                      { name: "Dibayar", value: reportData.total_sudah_dibayar, color: isDark ? "#a78bfa" : "#7c3aed" },
                     ].map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
@@ -477,15 +485,15 @@ export default function ReportsPage() {
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="flex items-center justify-between p-4 rounded-lg bg-indigo-50/50 border border-indigo-100">
+                <div className="flex items-center justify-between p-4 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30">
                   <div>
-                    <p className="text-sm font-medium text-indigo-700">LM (Lemari)</p>
-                    <p className="text-xl font-bold text-indigo-700 mt-1">
+                    <p className="text-sm font-medium text-indigo-700 dark:text-indigo-400">LM (Lemari)</p>
+                    <p className="text-xl font-bold text-indigo-700 dark:text-indigo-400 mt-1">
                       {formatIDR(reportData.omzet_lm)}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-indigo-600">
+                    <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
                       {reportData.total_omzet_lunas > 0
                         ? ((reportData.omzet_lm / reportData.total_omzet_lunas) * 100).toFixed(1)
                         : 0}%
@@ -493,15 +501,15 @@ export default function ReportsPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-4 rounded-lg bg-violet-50/50 border border-violet-100">
+                <div className="flex items-center justify-between p-4 rounded-lg bg-violet-50/50 dark:bg-violet-950/20 border border-violet-100 dark:border-violet-900/30">
                   <div>
-                    <p className="text-sm font-medium text-violet-700">BR (Bukan Lemari)</p>
-                    <p className="text-xl font-bold text-violet-700 mt-1">
+                    <p className="text-sm font-medium text-violet-700 dark:text-violet-400">BR (Bukan Lemari)</p>
+                    <p className="text-xl font-bold text-violet-700 dark:text-violet-400 mt-1">
                       {formatIDR(reportData.omzet_br)}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-violet-600">
+                    <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">
                       {reportData.total_omzet_lunas > 0
                         ? ((reportData.omzet_br / reportData.total_omzet_lunas) * 100).toFixed(1)
                         : 0}%
@@ -514,10 +522,10 @@ export default function ReportsPage() {
 
           {/* Bonus Log */}
           {bonusTransactions.length > 0 && (
-            <Card className="border-yellow-200">
+            <Card className="border-yellow-200 dark:border-yellow-900/40">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Gift className="h-5 w-5 text-yellow-600" />
+                  <Gift className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                   Log Bonus
                 </CardTitle>
                 <CardDescription>
@@ -528,7 +536,7 @@ export default function ReportsPage() {
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="bg-yellow-50/80">
+                      <TableRow className="bg-yellow-50/80 dark:bg-yellow-950/20">
                         <TableHead className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase">
                           Tanggal
                         </TableHead>
@@ -548,14 +556,14 @@ export default function ReportsPage() {
                     </TableHeader>
                     <TableBody>
                       {bonusTransactions.map((t) => (
-                        <TableRow key={t.id} className="hover:bg-yellow-50/50">
+                        <TableRow key={t.id} className="hover:bg-yellow-50/50 dark:hover:bg-yellow-950/10">
                           <TableCell className="text-sm">
                             {format(new Date(t.tanggal), "dd MMM yyyy", {
                               locale: localeID,
                             })}
                           </TableCell>
                           <TableCell>
-                            <span className="font-mono text-xs bg-yellow-100 px-2 py-1 rounded">
+                              <span className="font-mono text-xs bg-yellow-100 dark:bg-yellow-950/40 px-2 py-1 rounded">
                               {t.nomor_bon}
                             </span>
                           </TableCell>
@@ -567,8 +575,8 @@ export default function ReportsPage() {
                               variant="secondary"
                               className={`text-xs ${
                                 t.status === "Lunas"
-                                  ? "bg-green-50 text-green-700"
-                                  : "bg-orange-50 text-orange-700"
+                                  ? "badge-lunas"
+                                  : "badge-piutang"
                               }`}
                             >
                               {t.status}
