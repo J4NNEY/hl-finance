@@ -483,16 +483,16 @@ export default function NewTransactionPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="flex items-center gap-4">
         <Link href="/transactions">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="rounded-lg">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold">Buat Bon Baru</h1>
-          <p className="text-muted-foreground">
+          <h1 className="page-title text-2xl">Buat Bon Baru</h1>
+          <p className="page-subtitle">
             Input transaksi penjualan baru
           </p>
         </div>

@@ -32,27 +32,27 @@ interface ConfirmDialogProps {
 const typeConfig = {
   danger: {
     icon: AlertTriangle,
-    iconColor: "text-red-600",
-    iconBg: "bg-red-50",
+    iconColor: "text-red-600 dark:text-red-400",
+    iconBg: "bg-red-50 dark:bg-red-950/40",
     buttonClass: "bg-red-600 hover:bg-red-700",
   },
   warning: {
     icon: AlertTriangle,
-    iconColor: "text-orange-600",
-    iconBg: "bg-orange-50",
+    iconColor: "text-orange-600 dark:text-orange-400",
+    iconBg: "bg-orange-50 dark:bg-orange-950/40",
     buttonClass: "bg-orange-600 hover:bg-orange-700",
   },
   info: {
     icon: Info,
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-50",
+    iconColor: "text-blue-600 dark:text-blue-400",
+    iconBg: "bg-blue-50 dark:bg-blue-950/40",
     buttonClass: "bg-blue-600 hover:bg-blue-700",
   },
   success: {
     icon: CheckCircle,
-    iconColor: "text-green-600",
-    iconBg: "bg-green-50",
-    buttonClass: "bg-green-600 hover:bg-green-700",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
+    buttonClass: "bg-emerald-600 hover:bg-emerald-700",
   },
 };
 

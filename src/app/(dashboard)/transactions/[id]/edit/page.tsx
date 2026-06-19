@@ -485,16 +485,16 @@ export default function EditTransactionPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="flex items-center gap-4">
         <Link href={`/transactions/${transactionId}`}>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="rounded-lg">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold">Edit Transaksi</h1>
-          <p className="text-muted-foreground">
+          <h1 className="page-title text-2xl">Edit Transaksi</h1>
+          <p className="page-subtitle">
             Edit bon {originalNomorBon} — nilai akan dihitung ulang otomatis
           </p>
         </div>
