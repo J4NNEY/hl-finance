@@ -341,12 +341,12 @@ export default function CustomerDetailPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/customers">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
+            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50">
+            <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight">
               {customer.nama}
             </h1>
             <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5">
@@ -368,8 +368,8 @@ export default function CustomerDetailPage() {
       </div>
 
       {/* Customer Info */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="min-h-[100px]">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl min-h-[100px]">
           <CardContent className="p-4 h-full flex flex-col justify-between">
             <div>
               <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
@@ -382,7 +382,7 @@ export default function CustomerDetailPage() {
                       <Badge
                         key={i}
                         variant="secondary"
-                        className="text-xs badge-br"
+                        className="text-xs badge-lm"
                       >
                         {d}%
                       </Badge>
@@ -396,7 +396,7 @@ export default function CustomerDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="min-h-[100px]">
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl min-h-[100px]">
           <CardContent className="p-4 h-full flex flex-col justify-between">
             <div>
               <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
@@ -423,7 +423,7 @@ export default function CustomerDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="min-h-[100px]">
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl min-h-[100px]">
           <CardContent className="p-4 h-full flex flex-col justify-between">
             <div>
               <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
@@ -437,7 +437,7 @@ export default function CustomerDetailPage() {
         </Card>
 
         <Card
-          className={`min-h-[100px] ${
+          className={`bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl min-h-[100px] ${
             bonusesAvailable > 0
               ? "border-yellow-300 dark:border-yellow-800/40 bg-yellow-50/50 dark:bg-yellow-950/10"
               : ""
@@ -471,7 +471,7 @@ export default function CustomerDetailPage() {
       </div>
 
       {/* Month/Year Selector */}
-      <Card>
+      <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
         <CardContent className="p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">

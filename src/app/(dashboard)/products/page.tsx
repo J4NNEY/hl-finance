@@ -139,12 +139,12 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50">Produk</h1>
-          <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5">
+      <div className="page-header-row">
+        <div className="page-header">
+          <h1 className="page-title">Produk</h1>
+          <p className="page-subtitle">
             Kelola data barang dan harga
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function ProductsPage() {
             variant="outline"
             onClick={handleExport}
             disabled={products.length === 0}
-            className="h-9 text-sm"
+            className="h-9 text-sm rounded-lg"
           >
             <Download className="mr-1.5 h-4 w-4" />
             Export
@@ -163,7 +163,7 @@ export default function ProductsPage() {
               setSelectedProduct(null);
               setDialogOpen(true);
             }}
-            className="h-9 text-sm bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-600/20"
+            className="h-9 text-sm bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-600/20 rounded-lg"
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Tambah
@@ -172,7 +172,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Table Card */}
-      <Card>
+      <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
         <CardHeader className="pb-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>

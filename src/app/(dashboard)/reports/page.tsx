@@ -225,17 +225,17 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div>
-        <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50">Laporan</h1>
-        <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5">
+      <div className="page-header">
+        <h1 className="page-title">Laporan</h1>
+        <p className="page-subtitle">
           Rekap omzet, laba, dan piutang
         </p>
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
             <Filter className="h-4 w-4 text-stone-400 dark:text-stone-500" />
@@ -373,8 +373,8 @@ export default function ReportsPage() {
           </div>
 
           {/* Chart + Stats */}
-          <div className="grid gap-6 lg:grid-cols-5">
-            <Card className="lg:col-span-3">
+          <div className="grid gap-5 lg:grid-cols-5">
+            <Card className="lg:col-span-3 bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-stone-700 dark:text-stone-200">
                   Perbandingan Keuangan
@@ -441,34 +441,34 @@ export default function ReportsPage() {
             </Card>
 
             <div className="lg:col-span-2 grid gap-4 content-start">
-              <Card>
+              <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
                 <CardContent className="p-4">
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Omzet Lunas</p>
-                  <p className="text-xl font-bold text-indigo-600 mt-1">
+                  <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400 mt-1">
                     {formatIDR(reportData.total_omzet_lunas)}
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
                 <CardContent className="p-4">
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Laba HL</p>
-                  <p className="text-xl font-bold text-emerald-600 mt-1">
+                  <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
                     {formatIDR(reportData.total_laba_lunas)}
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
                 <CardContent className="p-4">
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Piutang</p>
-                  <p className="text-xl font-bold text-red-600 mt-1">
+                  <p className="text-xl font-bold text-red-600 dark:text-red-400 mt-1">
                     {formatIDR(reportData.total_piutang)}
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
                 <CardContent className="p-4">
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-medium">Sudah Dibayar</p>
-                  <p className="text-xl font-bold text-purple-600 mt-1">
+                  <p className="text-xl font-bold text-purple-600 dark:text-purple-400 mt-1">
                     {formatIDR(reportData.total_sudah_dibayar)}
                   </p>
                 </CardContent>
@@ -477,7 +477,7 @@ export default function ReportsPage() {
           </div>
 
           {/* Breakdown by Type */}
-          <Card>
+          <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-stone-700 dark:text-stone-200">
                 Breakdown per Tipe Produk

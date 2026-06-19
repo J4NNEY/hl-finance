@@ -307,13 +307,13 @@ export default function TransactionDetailPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/transactions">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
+            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50">
+              <h1 className="text-xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight">
                 {transaction.nomor_bon}
               </h1>
               <Badge
@@ -392,8 +392,8 @@ export default function TransactionDetailPage() {
       </div>
 
       {/* Transaction Info */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
           <CardContent className="p-4">
             <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
               Pelanggan
@@ -404,7 +404,7 @@ export default function TransactionDetailPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
           <CardContent className="p-4">
             <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
               Status
@@ -434,7 +434,7 @@ export default function TransactionDetailPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
           <CardContent className="p-4">
             <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
               Ongkir
@@ -445,7 +445,7 @@ export default function TransactionDetailPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
           <CardContent className="p-4">
             <p className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wide">
               Total Tagihan
@@ -469,7 +469,7 @@ export default function TransactionDetailPage() {
       )}
 
       {/* Transaction Lines */}
-      <Card>
+      <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
             <FileText className="h-4 w-4 text-stone-400 dark:text-stone-500" />
@@ -552,7 +552,7 @@ export default function TransactionDetailPage() {
       </Card>
 
       {/* Summary */}
-      <Card>
+      <Card className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl">
         <CardHeader className="pb-3">
           <CardTitle className="text-base">Ringkasan</CardTitle>
         </CardHeader>

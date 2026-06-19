@@ -9,6 +9,9 @@ import {
   CheckCircle2,
   Wallet,
   ArrowRight,
+  Calendar,
+  CreditCard,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -157,29 +160,29 @@ export default async function DashboardPage() {
     .sort((a, b) => b.total - a.total)
     .slice(0, 5);
 
-  const cardShadow = "0 1px 3px rgba(0,0,0,0.04)";
-
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex items-end justify-between">
+    <div className="space-y-7 animate-fade-in">
+      {/* Page Header */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-stone-900 dark:text-stone-50 tracking-tight">
             Beranda
           </h1>
-          <p className="text-sm text-stone-500 dark:text-stone-400 mt-1">
+          <p className="text-sm text-stone-500 dark:text-stone-400 mt-1 flex items-center gap-1.5">
+            <Calendar className="h-3.5 w-3.5" />
             {format(new Date(), "EEEE, dd MMMM yyyy", { locale: localeID })}
           </p>
         </div>
         <Link href="/transactions/new">
-          <Button className="h-9 text-sm bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-600/20">
-            + Buat Bon
+          <Button className="h-9 text-sm bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-600/20 rounded-lg">
+            <CreditCard className="mr-1.5 h-4 w-4" />
+            Buat Bon
           </Button>
         </Link>
       </div>
 
       {/* Stat Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
         {[
           {
             label: "Pelanggan",
@@ -211,31 +214,22 @@ export default async function DashboardPage() {
           },
         ].map((stat) => {
           const Icon = stat.icon;
-          const colorMap: Record<string, { bg: string; icon: string }> = {
-            indigo: { bg: "bg-indigo-50 dark:bg-indigo-950/40", icon: "text-indigo-600 dark:text-indigo-400" },
-            violet: { bg: "bg-violet-50 dark:bg-violet-950/40", icon: "text-violet-600 dark:text-violet-400" },
-            emerald: { bg: "bg-emerald-50 dark:bg-emerald-950/40", icon: "text-emerald-600 dark:text-emerald-400" },
-            amber: { bg: "bg-amber-50 dark:bg-amber-950/40", icon: "text-amber-600 dark:text-amber-400" },
+          const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
+            indigo: { bg: "bg-indigo-50 dark:bg-indigo-950/40", icon: "text-indigo-600 dark:text-indigo-400", ring: "ring-indigo-100 dark:ring-indigo-900/30" },
+            violet: { bg: "bg-violet-50 dark:bg-violet-950/40", icon: "text-violet-600 dark:text-violet-400", ring: "ring-violet-100 dark:ring-violet-900/30" },
+            emerald: { bg: "bg-emerald-50 dark:bg-emerald-950/40", icon: "text-emerald-600 dark:text-emerald-400", ring: "ring-emerald-100 dark:ring-emerald-900/30" },
+            amber: { bg: "bg-amber-50 dark:bg-amber-950/40", icon: "text-amber-600 dark:text-amber-400", ring: "ring-amber-100 dark:ring-amber-900/30" },
           };
           const c = colorMap[stat.color];
 
           const card = (
-            <div
-              className="group rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-5 transition-all duration-200 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-sm"
-              style={{ boxShadow: cardShadow }}
-            >
+            <div className="stat-card group hover-lift">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                  <p className="text-3xl font-bold text-stone-900 dark:text-stone-50 mt-2 tabular-nums">
-                    {stat.value}
-                  </p>
+                  <p className="stat-card-label">{stat.label}</p>
+                  <p className="stat-card-value">{stat.value}</p>
                 </div>
-                <div
-                  className={`${c.bg} rounded-xl p-3 transition-transform duration-200 group-hover:scale-105`}
-                >
+                <div className={`${c.bg} ${c.ring} ring rounded-xl p-3 transition-transform duration-200 group-hover:scale-110`}>
                   <Icon className={`h-5 w-5 ${c.icon}`} />
                 </div>
               </div>
@@ -253,58 +247,39 @@ export default async function DashboardPage() {
       </div>
 
       {/* Financial Summary */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div
-          className="rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-5"
-          style={{ boxShadow: cardShadow }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/40 p-2.5">
+      <div className="grid gap-4 sm:grid-cols-3 stagger-children">
+        <div className="stat-card hover-lift">
+          <div className="flex items-center gap-3.5">
+            <div className="rounded-xl icon-bg-indigo p-2.5 ring ring-indigo-100 dark:ring-indigo-900/30">
               <TrendingUp className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-                Omzet Lunas
-              </p>
-              <p className="text-xl font-bold text-stone-900 dark:text-stone-50 mt-1 tabular-nums">
-                {formatIDR(totalOmzetLunas)}
-              </p>
+              <p className="stat-card-label">Omzet Lunas</p>
+              <p className="stat-card-value-sm">{formatIDR(totalOmzetLunas)}</p>
             </div>
           </div>
         </div>
 
-        <div
-          className="rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-5"
-          style={{ boxShadow: cardShadow }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-emerald-50 dark:bg-emerald-950/40 p-2.5">
+        <div className="stat-card hover-lift">
+          <div className="flex items-center gap-3.5">
+            <div className="rounded-xl icon-bg-emerald p-2.5 ring ring-emerald-100 dark:ring-emerald-900/30">
               <Wallet className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-                Laba Lunas
-              </p>
-              <p className="text-xl font-bold text-stone-900 dark:text-stone-50 mt-1 tabular-nums">
-                {formatIDR(totalLabaLunas)}
-              </p>
+              <p className="stat-card-label">Laba Lunas</p>
+              <p className="stat-card-value-sm">{formatIDR(totalLabaLunas)}</p>
             </div>
           </div>
         </div>
 
-        <div
-          className="rounded-xl border border-amber-200/80 dark:border-amber-800/40 bg-amber-50/40 dark:bg-amber-950/20 p-5"
-          style={{ boxShadow: cardShadow }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-amber-100 dark:bg-amber-900/40 p-2.5">
+        <div className="stat-card border-amber-200/80 dark:border-amber-800/30 bg-amber-50/30 dark:bg-amber-950/5 hover-lift">
+          <div className="flex items-center gap-3.5">
+            <div className="rounded-xl icon-bg-amber p-2.5 ring ring-amber-100 dark:ring-amber-900/30">
               <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-                Total Piutang
-              </p>
-              <p className="text-xl font-bold text-amber-700 dark:text-amber-400 mt-1 tabular-nums">
+              <p className="stat-card-label">Total Piutang</p>
+              <p className="text-2xl font-bold text-amber-700 dark:text-amber-400 tabular-nums mt-1.5">
                 {formatIDR(totalPiutang)}
               </p>
             </div>
@@ -312,31 +287,29 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Chart + Recent */}
-      <div className="grid gap-6 lg:grid-cols-5">
-        <div
-          className="lg:col-span-3 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-5"
-          style={{ boxShadow: cardShadow }}
-        >
-          <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-200 mb-4">
+      {/* Chart + Recent Transactions */}
+      <div className="grid gap-5 lg:grid-cols-5">
+        {/* Chart */}
+        <div className="lg:col-span-3 bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-200 mb-4 flex items-center gap-2">
+            <TrendingUp className="h-4 w-4 text-stone-400 dark:text-stone-500" />
             Omzet & Laba — 6 Bulan Terakhir
           </h3>
           <DashboardChart data={chartData} />
         </div>
 
-        <div
-          className="lg:col-span-2 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 overflow-hidden"
-          style={{ boxShadow: cardShadow }}
-        >
+        {/* Recent Transactions */}
+        <div className="lg:col-span-2 bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-5 pt-5 pb-3">
-            <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-200">
+            <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-200 flex items-center gap-2">
+              <FileText className="h-4 w-4 text-stone-400 dark:text-stone-500" />
               Transaksi Terakhir
             </h3>
             <Link href="/transactions">
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 text-xs text-stone-500 dark:text-stone-400 px-2 gap-1"
+                className="h-7 text-xs text-stone-500 dark:text-stone-400 px-2 gap-1 rounded-md"
               >
                 Semua
                 <ArrowRight className="h-3 w-3" />
@@ -345,11 +318,11 @@ export default async function DashboardPage() {
           </div>
           <div>
             {recentTransactions.length === 0 ? (
-              <div className="py-10 text-center text-sm text-stone-400 dark:text-stone-500">
+              <div className="py-12 text-center text-sm text-stone-400 dark:text-stone-500">
                 Belum ada transaksi
               </div>
             ) : (
-              <div className="divide-y divide-stone-100 dark:divide-stone-800">
+              <div className="divide-y divide-stone-100 dark:divide-stone-800/60">
                 {recentTransactions.map((t) => {
                   const lineOmzet =
                     t.transaction_lines?.reduce(
@@ -360,9 +333,9 @@ export default async function DashboardPage() {
 
                   return (
                     <Link key={t.id} href={`/transactions/${t.id}`}>
-                      <div className="flex items-center justify-between px-5 py-3 hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors cursor-pointer">
+                      <div className="flex items-center justify-between px-5 py-3.5 hover:bg-stone-50/70 dark:hover:bg-stone-800/30 transition-colors cursor-pointer group">
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-stone-800 dark:text-stone-100 truncate">
+                          <p className="text-sm font-semibold text-stone-800 dark:text-stone-100 truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                             {t.customer?.nama || "-"}
                           </p>
                           <p className="text-xs text-stone-400 dark:text-stone-500 font-mono mt-0.5">
@@ -394,12 +367,9 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Piutang */}
+      {/* Piutang per Pelanggan */}
       {topPiutang.length > 0 && (
-        <div
-          className="rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 overflow-hidden"
-          style={{ boxShadow: cardShadow }}
-        >
+        <div className="bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-5 pt-5 pb-3">
             <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-200 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 text-amber-500" />
@@ -409,21 +379,21 @@ export default async function DashboardPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 text-xs text-stone-500 dark:text-stone-400 px-2 gap-1"
+                className="h-7 text-xs text-stone-500 dark:text-stone-400 px-2 gap-1 rounded-md"
               >
                 Laporan
                 <ArrowRight className="h-3 w-3" />
               </Button>
             </Link>
           </div>
-          <div className="divide-y divide-stone-100 dark:divide-stone-800">
+          <div className="divide-y divide-stone-100 dark:divide-stone-800/60">
             {topPiutang.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between px-5 py-3"
+                className="flex items-center justify-between px-5 py-3.5 hover:bg-stone-50/50 dark:hover:bg-stone-800/20 transition-colors"
               >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 text-xs font-bold shrink-0">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 text-xs font-bold shrink-0 ring-1 ring-amber-200/50 dark:ring-amber-800/30">
                     {item.nama.charAt(0)}
                   </div>
                   <div className="min-w-0">

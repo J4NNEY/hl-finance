@@ -16,13 +16,13 @@ export default function DashboardLayout({
   useGlobalShortcuts();
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-stone-50/50 dark:bg-stone-950/50">
       <SkipToContent />
       <Sidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden min-w-0">
         <Navbar />
         <main id="main-content" className="flex-1 overflow-y-auto" role="main">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1400px] px-5 py-6 sm:px-7 lg:px-10">
             <ErrorBoundary>{children}</ErrorBoundary>
           </div>
         </main>

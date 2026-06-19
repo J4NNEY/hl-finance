@@ -72,7 +72,7 @@
   --chart-3: #d97706;
   --chart-4: #7c3aed;
   --chart-5: #0891b2;
-  --radius: 0.5rem;
+  --radius: 0.625rem;
   --sidebar: #1c1917;
   --sidebar-foreground: #e7e2dc;
   --sidebar-primary: #818cf8;
@@ -122,11 +122,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground text-base;
+    @apply bg-background text-foreground text-[15px];
     font-feature-settings: "cv11", "ss01";
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
   }
   *:focus-visible {
     @apply ring-2 ring-primary ring-offset-2 dark:ring-offset-stone-900;
@@ -138,27 +138,43 @@
     text-wrap: balance;
   }
 
-  /* Card pattern — reusable dark-mode-safe card */
+  /* ============ CARD SYSTEM ============ */
   .card-surface {
     @apply bg-white border-stone-200/80 dark:bg-stone-900 dark:border-stone-800/80;
   }
 
-  /* Table header */
+  .card-interactive {
+    @apply bg-white border border-stone-200/60 dark:bg-stone-900 dark:border-stone-800/60 transition-all duration-200 cursor-pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .dark .card-interactive {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.12);
+  }
+
+  .dark .card-interactive:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  /* ============ TABLE SYSTEM ============ */
   .table-header-row {
     @apply bg-stone-50/80 dark:bg-stone-800/60;
   }
 
-  /* Table row hover */
   .table-row-hover {
-    @apply hover:bg-stone-50/50 dark:hover:bg-stone-800/40;
+    @apply hover:bg-stone-50/50 dark:hover:bg-stone-800/40 transition-colors;
   }
 
-  /* Divider */
   .divider-subtle {
     @apply divide-stone-100 dark:divide-stone-800;
   }
 
-  /* Text hierarchy */
+  /* ============ TEXT HIERARCHY ============ */
   .text-heading {
     @apply text-stone-900 dark:text-stone-50;
   }
@@ -175,21 +191,11 @@
     @apply text-stone-400 dark:text-stone-500;
   }
 
-  /* Badge: code/mono */
   .badge-code {
-    @apply bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300;
+    @apply bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-mono text-xs;
   }
 
-  /* Skeleton shimmer */
-  .skeleton-base {
-    @apply bg-stone-200 dark:bg-stone-700;
-  }
-
-  .skeleton-shine {
-    @apply bg-stone-100 dark:bg-stone-800;
-  }
-
-  /* Badge variants with proper dark mode */
+  /* ============ BADGE SYSTEM ============ */
   .badge-lunas {
     @apply bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400;
   }
@@ -210,7 +216,7 @@
     @apply bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400;
   }
 
-  /* Stat card icon backgrounds */
+  /* ============ ICON BACKGROUNDS ============ */
   .icon-bg-indigo {
     @apply bg-indigo-50 dark:bg-indigo-950/40;
   }
@@ -231,13 +237,65 @@
     @apply bg-orange-50 dark:bg-orange-950/40;
   }
 
-  /* Animations */
+  .icon-bg-rose {
+    @apply bg-rose-50 dark:bg-rose-950/40;
+  }
+
+  /* ============ PAGE HEADER ============ */
+  .page-header {
+    @apply flex flex-col gap-1;
+  }
+
+  .page-header-row {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .page-title {
+    @apply text-xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-stone-500 dark:text-stone-400;
+  }
+
+  /* ============ STAT CARD ============ */
+  .stat-card {
+    @apply rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-stone-900 p-5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .dark .stat-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .stat-card-label {
+    @apply text-[11px] font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider;
+  }
+
+  .stat-card-value {
+    @apply text-2xl font-bold text-stone-900 dark:text-stone-50 tabular-nums mt-1.5;
+  }
+
+  .stat-card-value-sm {
+    @apply text-lg font-bold text-stone-900 dark:text-stone-50 tabular-nums mt-1;
+  }
+
+  /* ============ SKELETON ============ */
+  .skeleton-base {
+    @apply bg-stone-200 dark:bg-stone-700 rounded-md animate-pulse;
+  }
+
+  .skeleton-shine {
+    @apply bg-stone-100 dark:bg-stone-800 rounded-md;
+  }
+
+  /* ============ ANIMATIONS ============ */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.35s ease-out;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-slide-down {
@@ -248,64 +306,86 @@
     animation: scaleIn 0.2s ease-out;
   }
 
-  /* Staggered children animation */
   .stagger-children > * {
-    animation: slideUp 0.4s ease-out backwards;
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
 
   .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-  .stagger-children > *:nth-child(2) { animation-delay: 50ms; }
-  .stagger-children > *:nth-child(3) { animation-delay: 100ms; }
-  .stagger-children > *:nth-child(4) { animation-delay: 150ms; }
-  .stagger-children > *:nth-child(5) { animation-delay: 200ms; }
-  .stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 300ms; }
 
-  /* Hover card lift */
-  .hover-lift {
-    @apply transition-all duration-200;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
-
-  .dark .hover-lift:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Glass effect */
+  /* ============ EFFECTS ============ */
   .glass {
     @apply bg-white/70 dark:bg-stone-950/70 backdrop-blur-xl;
   }
 
-  /* Gradient text */
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 dark:from-indigo-400 dark:to-indigo-300;
   }
+
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.012;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  .dark .grain-overlay::after {
+    opacity: 0.03;
+  }
+
+  /* ============ FORM ELEMENTS ============ */
+  .input-base {
+    @apply h-9 text-sm rounded-lg border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 px-3;
+    @apply focus:ring-2 focus:ring-primary/20 focus:border-primary transition-shadow;
+  }
+
+  .select-trigger {
+    @apply h-9 text-sm rounded-lg;
+  }
 }
 
+/* ============ KEYFRAMES ============ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
-  from { opacity: 0; transform: translateY(-8px); }
+  from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Smooth scrollbar */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ============ SCROLLBAR ============ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -321,4 +401,9 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-stone-400 dark:bg-stone-600;
+}
+
+/* ============ SELECTION ============ */
+::selection {
+  @apply bg-indigo-100 dark:bg-indigo-900/40 text-indigo-900 dark:text-indigo-100;
 }
