@@ -47,15 +47,26 @@ export function CommandPalette() {
     return () => document.removeEventListener("keydown", handler);
   }, [open]);
 
-  if (!open) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) setOpen(false);
-      }}
-    >
+    <>
+      {/* Trigger */}
+      <button
+        onClick={() => setOpen(true)}
+        className="hidden lg:flex items-center gap-2 h-8 px-3 rounded-lg border border-stone-200/80 dark:border-stone-700/80 bg-stone-50/50 dark:bg-stone-800/50 text-xs text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:border-stone-300 dark:hover:border-stone-600 transition-colors cursor-pointer"
+        aria-label="Buka command palette"
+      >
+        <Search className="h-3.5 w-3.5" />
+        <span>Cari...</span>
+        <kbd className="ml-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 px-1.5 font-mono text-[10px] font-medium text-stone-400 dark:text-stone-500">
+          <span className="text-xs">&#8984;</span>K
+        </kbd>
+      </button>
+
+      {/* Modal */}
+      {open && (
+        <div
+          className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]"
+        >
       {/* Backdrop - full screen */}
       <div
         className="fixed inset-0 bg-black/40 dark:bg-black/60 animate-fade-in"
@@ -164,6 +175,8 @@ export function CommandPalette() {
           </Command.List>
         </Command>
       </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
