@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, ShieldAlert } from "lucide-react";
+import { Loader2, ShieldAlert, Eye, EyeOff } from "lucide-react";
 
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -31,6 +31,7 @@ function clearLockState() {
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [focusField, setFocusField] = useState<string | null>(null);
@@ -296,7 +297,7 @@ export default function LoginPage() {
               <div className="relative">
                 <input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Masukkan password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -305,7 +306,7 @@ export default function LoginPage() {
                   required
                   disabled={loading || isLocked}
                   className={`
-                    block w-full rounded-xl border px-4 py-2.5 text-sm
+                    block w-full rounded-xl border px-4 py-2.5 pr-11 text-sm
                     placeholder:text-stone-400 dark:placeholder:text-stone-500
                     transition-all duration-200
                     outline-none
@@ -317,6 +318,19 @@ export default function LoginPage() {
                     }
                   `}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 transition-colors"
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Sembunyikan password" : "Lihat password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
                 <div
                   className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full bg-indigo-500 transition-transform duration-300 origin-left"
                   style={{
