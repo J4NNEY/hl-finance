@@ -358,7 +358,6 @@ export default function CustomerDetailPage() {
           <Button
             variant="outline"
             onClick={handleGenerateReport}
-            disabled={filteredTransactions.length === 0}
             className="h-9 text-sm"
           >
             <Download className="mr-1.5 h-4 w-4" />

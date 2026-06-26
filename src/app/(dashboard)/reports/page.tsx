@@ -78,6 +78,7 @@ export default function ReportsPage() {
     new Date().getFullYear().toString()
   );
   const [reportType, setReportType] = useState("overall");
+  const [selectedProductType, setSelectedProductType] = useState<string>("all");
   const [loading, setLoading] = useState(true);
   const [transactions, setTransactions] = useState<ReportTransaction[]>([]);
   const [bonusTransactions, setBonusTransactions] = useState<ReportTransaction[]>([]);
@@ -162,16 +163,19 @@ export default function ReportsPage() {
       // AC-7.7: Exclude bonus transactions from omzet/profit totals
       if (t.is_bonus) return;
 
-      const lineOmzet =
-        t.transaction_lines?.reduce(
-          (sum: number, l: { line_omzet: number }) => sum + (l.line_omzet || 0),
-          0
-        ) || 0;
-      const lineLaba =
-        t.transaction_lines?.reduce(
-          (sum: number, l: { line_laba: number }) => sum + (l.line_laba || 0),
-          0
-        ) || 0;
+      // Filter lines by product type if "Per Tipe Produk" is selected
+      const filteredLines = reportType === "type" && selectedProductType !== "all"
+        ? t.transaction_lines?.filter((l: { product?: { tipe: string } }) => l.product?.tipe === selectedProductType) || []
+        : t.transaction_lines || [];
+
+      const lineOmzet = filteredLines.reduce(
+        (sum: number, l: { line_omzet: number }) => sum + (l.line_omzet || 0),
+        0
+      );
+      const lineLaba = filteredLines.reduce(
+        (sum: number, l: { line_laba: number }) => sum + (l.line_laba || 0),
+        0
+      );
       const total = lineOmzet + (t.ongkir || 0);
 
       if (t.status === "Lunas") {
@@ -201,7 +205,7 @@ export default function ReportsPage() {
     });
 
     setLoading(false);
-  }, [supabase, selectedCustomer, selectedMonth, selectedYear]);
+  }, [supabase, selectedCustomer, selectedMonth, selectedYear, selectedProductType, reportType]);
 
   useEffect(() => {
     fetchReportData(); // eslint-disable-line react-hooks/set-state-in-effect
@@ -211,6 +215,10 @@ export default function ReportsPage() {
     if (reportType === "customer" && selectedCustomer !== "all") {
       const customer = customers.find((c) => c.id === selectedCustomer);
       return `Laporan ${customer?.nama}`;
+    }
+
+    if (reportType === "type" && selectedProductType !== "all") {
+      return `Laporan Tipe ${selectedProductType}`;
     }
 
     return `Laporan ${reportType === "type" ? "Per Tipe" : "Keseluruhan"}`;
@@ -275,6 +283,25 @@ export default function ReportsPage() {
                         {c.nama}
                       </SelectItem>
                     ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            {reportType === "type" && (
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase">Tipe Produk</label>
+                <Select
+                  value={selectedProductType}
+                  onValueChange={(v) => setSelectedProductType(v || "all")}
+                >
+                  <SelectTrigger className="h-9 text-sm">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Semua Tipe</SelectItem>
+                    <SelectItem value="LM">LM (Lemari)</SelectItem>
+                    <SelectItem value="BR">BR (Bukan Lemari)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
