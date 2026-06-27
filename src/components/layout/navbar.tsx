@@ -11,13 +11,18 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LogOut, Menu, ChevronDown, Search } from "lucide-react";
+import { LogOut, Menu, ChevronDown, PanelLeftOpen } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarContent } from "./sidebar";
 import { CommandPalette } from "@/components/shared/command-palette";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
-export function Navbar() {
+interface NavbarProps {
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+export function Navbar({ collapsed = false, onToggleCollapse }: NavbarProps) {
   const router = useRouter();
   const supabase = createClient();
 
@@ -29,7 +34,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-stone-200/70 dark:border-stone-800/70 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl px-5 sm:px-7 lg:px-10">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
+        {/* Mobile menu */}
         <Sheet>
           <SheetTrigger
             render={
@@ -44,10 +50,23 @@ export function Navbar() {
           >
             <Menu className="h-5 w-5" />
           </SheetTrigger>
-          <SheetContent side="left" className="w-[260px] p-0">
+          <SheetContent side="left" className="w-[240px] p-0">
             <SidebarContent />
           </SheetContent>
         </Sheet>
+
+        {/* Desktop collapse toggle - only show when collapsed */}
+        {collapsed && onToggleCollapse && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleCollapse}
+            className="hidden lg:flex h-9 w-9 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg"
+            aria-label="Expand sidebar"
+          >
+            <PanelLeftOpen className="h-4 w-4" />
+          </Button>
+        )}
 
         <CommandPalette />
         <ThemeToggle />
